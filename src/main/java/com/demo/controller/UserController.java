@@ -1,6 +1,12 @@
 package com.demo.controller;
 
+import javax.validation.Valid;
+
+import com.demo.dto.UserDto;
 import com.demo.entity.User;
+import com.demo.exception.ErrorResponceDto;
+import com.demo.exception.Message;
+import com.demo.exception.ResourceNotFoundException;
 import com.demo.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,58 +29,64 @@ public class UserController {
 
 	// add users data
 	@PostMapping("/user")
-	public User addUserdata(@RequestBody User user) {
-		return userService.insertUser(user);
+	public ResponseEntity<?> addUserdata(@Valid @RequestBody UserDto userDto) {
+
+		try {
+			UserDto createUserDto = this.userService.createUser(userDto);
+			return new ResponseEntity<>(new Message("Success", "Success", createUserDto), HttpStatus.CREATED);
+		} catch (ResourceNotFoundException e) {
+			return new ResponseEntity<>(new ErrorResponceDto(e.getMessage(), "Access Denied"), HttpStatus.BAD_GATEWAY);
+
+		}
 
 	}
 
 	// get all user Data
 	@GetMapping("/user")
-	public ResponseEntity<?> getAllUsersData(
-			@RequestParam(defaultValue = "") String search,
-			@RequestParam(defaultValue = "1") String pageNumber,
-			@RequestParam(defaultValue = "12") String pageSize) {
+	public ResponseEntity<?> getAllUsersData(@Valid @RequestParam(defaultValue = "") String search,
+			@RequestParam(defaultValue = "1") String pageNumber, @RequestParam(defaultValue = "12") String pageSize) {
 		System.out.println("hello");
-		
+
 		Page<User> user = userService.getAllUsers(search, pageNumber, pageSize);
 
 		System.out.println("hello2");
 
-	
-		if(user.getTotalElements()!=0) {
-			
-				
-			
+		if (user.getTotalElements() != 0) {
+
 			System.out.println("hello1");
-			
-			return new ResponseEntity<>(user.getContent(),HttpStatus.OK);
-			
+
+			return new ResponseEntity<>(new  Message("Success","Success",user.getContent()),HttpStatus.OK)  ;  
+
 		}
-		return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(new ErrorResponceDto("Data Not Found", "Data Not Found"),HttpStatus.BAD_REQUEST);
 	}
 
 	// get user by id
 	@GetMapping("/user/{id}")
-	public User getUserById( @PathVariable Integer id) {
-		return this.userService.getByUserId( id);
-	}
+	public ResponseEntity<?> getByuserId(@Valid @PathVariable Integer id) {
 
-	
-	
+		try {
+			User user = userService.getByUserId(id);
+
+			return new ResponseEntity<>(new Message("Success", "Success", user), HttpStatus.OK);
+
+		} catch (ResourceNotFoundException e) {
+
+			return new ResponseEntity<>(new ErrorResponceDto(e.getMessage(), "Access Denied"), HttpStatus.BAD_GATEWAY);
+		}
+	}
 
 	// update users
 	@PutMapping("/user/{id}")
-	public User updateUser(@RequestBody User user, @PathVariable Integer id) {
-		user.setId(id);
-		return userService.addUser(user);
+	public ResponseEntity<?> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable Integer id) {
+		try {
+			UserDto userDto1 = this.userService.updateUser(userDto, id);
+			return new ResponseEntity<>(new Message("success", "success", userDto1), HttpStatus.OK);
 
-	}
-
-	// delete all users
-
-	@DeleteMapping("/user")
-	public void deleteAllUser(User user) {
-		userService.deleteAllUser(user);
+		} catch (ResourceNotFoundException exception) {
+			return new ResponseEntity<>(new ErrorResponceDto(exception.getMessage(), "Access Denied"),
+					HttpStatus.BAD_REQUEST);
+		}
 
 	}
 

@@ -27,20 +27,32 @@ public class UserService{
 	
 	
 	// add user 
-	public User insertUser(User user){
-		return userRepository.save(user);
+	public UserDto createUser(UserDto userDto){
+		User user = this.dtoToUser(userDto);
+		User user1=this.userRepository.save(user);
+		return this.userToDto(user1);
+		
+	  
 	}
+	     // update user by id
 	
-	// // update  users by id
-	public User addUser(User user){
-		return userRepository.save(user);
+	public UserDto updateUser(UserDto userDto,Integer id){
+		User user=this.userRepository.findById(id).orElseThrow();
+		
+		user.setName(userDto.getName());
+		user.setMobileNumber(userDto.getMobileNumber());
+		user.setEmail(userDto.getEmail());
+		user.setPassword(userDto.getPassword());
+
+		UserDto saveUser=this.userToDto(user);
+		return saveUser;
+		
+		
 		
 	}
-	// get all user (Get)
-	//public List<User> getAllUsers(){
-	//	return userRepository.findAll();
-	//} 
 	
+	
+	// get all users
 	
 	public Page<User> getAllUsers(String search,String pageNo,String pageSize){
 		
@@ -52,7 +64,7 @@ public class UserService{
 		}
 		else
 			
-		return userRepository.findByName(search, pageable, User.class);
+		return userRepository.findByNameIgnoreCaseContaining(search, pageable, User.class);
 		
 	}
 	
@@ -78,5 +90,33 @@ public class UserService{
 		
 	}
 
+	
+	//User To Dto
+	public UserDto userToDto(User user) {
+		UserDto userDto=this.modelMapper.map(user, UserDto.class);
+		
+	return	userDto;
+		
+		
+	}
+	
+	//Dto to User
+	
+	public User dtoToUser(UserDto userDto) {
+	User user=this.modelMapper.map(userDto,User.class);
+		return user;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

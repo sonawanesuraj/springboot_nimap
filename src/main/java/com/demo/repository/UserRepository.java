@@ -1,5 +1,8 @@
 package com.demo.repository;
 
+import java.util.Optional;
+
+import com.demo.dto.UserDto;
 import com.demo.entity.User;
 
 import org.springframework.data.domain.Page;
@@ -12,7 +15,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	//Optional<User> findByIdAndIsActiveTrue(Long id);
 	
-	Page<User>findByOrderById(Pageable pageable , Class<User> user);
-	Page<User>findByName(String name,Pageable pageable ,Class<User> user);
+	Page<User> findByOrderById(Pageable pageable , Class<User> user);
+	Page<User>findByNameIgnoreCaseContaining(String name,Pageable pageable ,Class<User> user);
+	
+    Optional<User>findByEmail(String email);
 	
 }
