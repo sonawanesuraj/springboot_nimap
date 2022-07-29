@@ -14,7 +14,6 @@ public class UserDto {
 	@NotEmpty
 	private String mobileNumber;
 	@Email(message="Email is not valid !!")
-    
 	private String email;
 	@NotEmpty
 	@Size(min = 4,max = 10,message = "password min of 3 chars and max of 10 chars !! ")
