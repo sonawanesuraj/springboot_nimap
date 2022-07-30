@@ -1,5 +1,8 @@
 package com.demo.security;
 
+import com.demo.entity.User;
+import com.demo.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 	
 	@Autowired
-	JwtTokenHelper jwtTokenHelper;
+	JwtTokenUtil jwtTokenUtil;
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -28,11 +31,13 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<JwtAuthResponce>createToken(@RequestBody JwtAuthRequest request){
-		
+		try {
+			
 		this.authenticate(request.getUsername(),request.getPassword());
+		
 		UserDetails userDetails = this.userDetailsService.loadUserByUsername(request.getUsername());
 		
-		 String token=this.jwtTokenHelper.generateToken(userDetails);
+		 String token=this.jwtTokenUtil.generateToken(userDetails);
 		
 		JwtAuthResponce responce = new JwtAuthResponce();
 		responce.setToken(token);

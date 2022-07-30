@@ -1,32 +1,43 @@
 package com.demo.entity;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import net.minidev.json.annotate.JsonIgnore;
 @Entity
 @Table(name="users")
-
 @Where(clause = "is_active=true")
 @SQLDelete(sql = "UPDATE users SET is_active=false WHERE id=?")
 public class User implements UserDetails {
 	@Id
+	@Column(name = "id", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "mobileNumber")
 	private String mobileNumber; 
+	
+	@Column(name = "email", unique = true)
 	private String email;
+	
+	@Column(name = "password")
+	@JsonIgnore
 	private String password;
+	
+	@Column(name = "is_active")
 	private boolean isActive = true;
 	
 	

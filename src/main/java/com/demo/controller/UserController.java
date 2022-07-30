@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 	@Autowired
-	UserService userService;
+     private UserService userService;
 
 	// add users data
 	@PostMapping("/user")
@@ -43,8 +43,10 @@ public class UserController {
 
 	// get all user Data
 	@GetMapping("/user")
-	public ResponseEntity<?> getAllUsersData(@Valid @RequestParam(defaultValue = "") String search,
-			@RequestParam(defaultValue = "1") String pageNumber, @RequestParam(defaultValue = "12") String pageSize) {
+	public ResponseEntity<?> getAllUsersData
+	       (@Valid @RequestParam(defaultValue = "")String search,
+			@RequestParam(defaultValue = "1") String pageNumber,
+			@RequestParam(defaultValue = "12") String pageSize) {
 		System.out.println("hello");
 
 		Page<User> user = userService.getAllUsers(search, pageNumber, pageSize);

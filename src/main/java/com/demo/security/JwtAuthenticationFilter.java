@@ -26,7 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private UserDetailsService userDetailsService;
 
 	@Autowired
-	private JwtTokenHelper jwtTokenHelper;
+	private JwtTokenUtil jwtTokenUtil;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			token = requestToken.substring(7);
 			
 			try {
-				username = this.jwtTokenHelper.getUsernameFromToken(token);
+				username = this.jwtTokenUtil.getUsernameFromToken(token);
 			}catch(IllegalArgumentException e)
 			{
 				System.out.println("Unable to get Jwt token");
@@ -76,7 +76,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		{
 			UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 			
-			if(this.jwtTokenHelper.validateToken(token, userDetails))
+			if(this.jwtTokenUtil.validateToken(token, userDetails))
 		
 			{
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());

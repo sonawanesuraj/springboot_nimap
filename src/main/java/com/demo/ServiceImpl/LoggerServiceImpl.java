@@ -1,0 +1,32 @@
+package com.demo.ServiceImpl;
+
+import com.demo.dto.LoggerDto;
+import com.demo.entity.LoggerEntity;
+import com.demo.entity.User;
+import com.demo.repository.LoggerRepository;
+import com.demo.service.LoggerServiceInterface;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+@Service
+public class LoggerServiceImpl implements LoggerServiceInterface {
+	
+	@Autowired
+	private LoggerRepository loggerRepository;
+
+	public void createLogger(LoggerDto loggerDto,User user) {
+		
+		LoggerEntity logger = new LoggerEntity();
+		logger.setUserId(user);
+		logger.setToken(loggerDto.getToken());
+		logger.setCreatedAt(loggerDto.getExpireAt());
+		logger.setExpireAt(loggerDto.getExpireAt());
+		loggerRepository.save(logger);
+		
+		
+		
+	}
+	
+
+}
+
