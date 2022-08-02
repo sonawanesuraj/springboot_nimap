@@ -24,7 +24,7 @@ public class LoggerDto {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(int userId){
 		userId = userId;
 	}
 

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 public class LoggerEntity implements Serializable {
 	
@@ -28,6 +30,7 @@ public class LoggerEntity implements Serializable {
 	private String token ;
 	
 	@Column(name = "created_at")
+	@CreationTimestamp
 	private Date createdAt;
 	
 	@Column(name = "expire_at")

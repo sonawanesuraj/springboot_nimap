@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface LoggerRepository extends JpaRepository<LoggerEntity, Integer> {
 	
 	  LoggerEntity findByToken(String token);
+	  
+	  
 	
 
 }

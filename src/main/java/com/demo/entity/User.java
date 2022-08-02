@@ -18,7 +18,7 @@ import net.minidev.json.annotate.JsonIgnore;
 @Table(name="users")
 @Where(clause = "is_active=true")
 @SQLDelete(sql = "UPDATE users SET is_active=false WHERE id=?")
-public class User implements UserDetails {
+public class User  {
 	@Id
 	@Column(name = "id", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,30 +92,6 @@ public class User implements UserDetails {
 		this.email = email;
 		this.password = password;
 		this.isActive = isActive;
-	}
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
-	@Override
-	public String getUsername() {
-		return this.email;
-	}
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-	@Override
-	public boolean isEnabled() {
-		return true;
 	}
 	
 	

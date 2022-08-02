@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 @Service
 public class UserService {
@@ -19,13 +20,22 @@ public class UserService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	// add user
-	public UserDto createUser(UserDto userDto) {
-		User user = this.dtoToUser(userDto);
-		User user1 = this.userRepository.save(user);
-		return this.userToDto(user1);
-
-	}
+		
+		public User save(UserDto userDto) {
+			User user=new User();
+			user.setEmail(userDto.getEmail());
+			user.setMobileNumber(userDto.getMobileNumber());
+			user.setName(userDto.getName());
+			user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+			
+			return this.userRepository.save(user);
+			
+		}
+	
+	
 	// update user by id
 
 	public UserDto updateUser(UserDto userDto, Integer id) {

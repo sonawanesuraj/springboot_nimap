@@ -1,11 +1,8 @@
 package com.demo.dto;
 
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name","mobileNumber","email"}))
 public class UserDto {  
 	
 	private int id;

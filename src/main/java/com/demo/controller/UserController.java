@@ -28,18 +28,18 @@ public class UserController {
      private UserService userService;
 
 	// add users data
-	@PostMapping("/user")
-	public ResponseEntity<?> addUserdata(@Valid @RequestBody UserDto userDto) {
+//	@PostMapping("/user")
+//	public ResponseEntity<?> addUserdata(@Valid @RequestBody UserDto userDto) {
+//
+//		try {
+//			UserDto createUserDto = this.userService.createUser(userDto);
+//			return new ResponseEntity<>(new Message("Success", "Success", createUserDto), HttpStatus.CREATED);
+//		} catch (ResourceNotFoundException e) {
+//			return new ResponseEntity<>(new ErrorResponceDto(e.getMessage(), "Access Denied"), HttpStatus.BAD_GATEWAY);
+//
+//		}
 
-		try {
-			UserDto createUserDto = this.userService.createUser(userDto);
-			return new ResponseEntity<>(new Message("Success", "Success", createUserDto), HttpStatus.CREATED);
-		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(new ErrorResponceDto(e.getMessage(), "Access Denied"), HttpStatus.BAD_GATEWAY);
-
-		}
-
-	}
+	
 
 	// get all user Data
 	@GetMapping("/user")

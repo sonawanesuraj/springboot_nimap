@@ -9,15 +9,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class SpringBootDemoApplication  implements CommandLineRunner{
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+public class SpringBootDemoApplication{
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootDemoApplication.class, args);
 	
 		
 	} 
+	
 	
 	@Bean
 	public ModelMapper modelMaper() {
@@ -26,12 +26,7 @@ public class SpringBootDemoApplication  implements CommandLineRunner{
 		
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		
-		System.out.println(this.passwordEncoder.encode("abc"));
-		
-	}
+
 
 }  
 

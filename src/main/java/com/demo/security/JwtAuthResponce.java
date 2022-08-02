@@ -1,20 +1,35 @@
 package com.demo.security;
 
-public class JwtAuthResponce {
-	
-	private String token;
-	
-	
+import java.io.Serializable;
 
-	public String getToken() {
-		return token;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+@Component
+public class JwtAuthResponce implements Serializable{
+	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	private String jwttoken;
+
+	public String getJwttoken() {
+		return jwttoken;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public JwtAuthResponce(String   jwttoken) {
+		
+		 this.jwttoken=jwttoken;
+	}
+
+	public JwtAuthResponce() {
+		super();
+		//TODO Auto-generated constructor stub
 	}
 	
 	
 	
-
+	
+	
+	
 }
