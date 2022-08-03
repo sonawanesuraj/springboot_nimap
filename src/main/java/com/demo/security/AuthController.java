@@ -3,6 +3,9 @@ package com.demo.security;
 
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+
 import com.demo.ServiceImpl.AuthServiceImpl;
 import com.demo.dto.LoggerDto;
 import com.demo.dto.UserDto;
@@ -20,12 +23,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/Auth")
 public class AuthController {
 
 	
@@ -88,6 +95,14 @@ private UserDetailsService userDetailsService;
 
 		return ResponseEntity.ok(this.userService.save(userDto));
 
+	}
+	
+	@Transactional
+	@RequestMapping(value="/logout",method=RequestMethod.POST)
+	public ResponseEntity<?>logoutUser(@RequestHeader("Authorization") String token,HttpServletRequest request ){
+		loggerServiceInterface.logout(token);
+		return new ResponseEntity<>(new ErrorResponceDto("Logout Successfully", "logoutSuccess"),HttpStatus.OK);
+		
 	}
 
 }

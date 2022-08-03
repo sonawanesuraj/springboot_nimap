@@ -62,7 +62,6 @@ public class UserController {
 		}
 		return new ResponseEntity<>(new ErrorResponceDto("Data Not Found", "Data Not Found"),HttpStatus.BAD_REQUEST);
 	}
-
 	// get user by id
 	@GetMapping("/user/{id}")
 	public ResponseEntity<?> getByuserId(@Valid @PathVariable Integer id) {
@@ -86,7 +85,7 @@ public class UserController {
 			return new ResponseEntity<>(new Message("success", "success", userDto1), HttpStatus.OK);
 
 		} catch (ResourceNotFoundException exception) {
-			return new ResponseEntity<>(new ErrorResponceDto(exception.getMessage(), "Access Denied"),
+			return new ResponseEntity<>(new ErrorResponceDto(exception.getMessage(), "User Not Found"),
 					HttpStatus.BAD_REQUEST);
 		}
 

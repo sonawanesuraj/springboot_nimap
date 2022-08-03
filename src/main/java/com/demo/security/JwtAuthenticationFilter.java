@@ -50,7 +50,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			try {
 			
 				email=jwtTokenUtil.getEmailFromToken(token);
-				System.out.println(jwtTokenUtil.getEmailFromToken(token));
+			//	System.out.println(jwtTokenUtil.getEmailFromToken(token));
 				
 			} catch (IllegalArgumentException e) 
 			{

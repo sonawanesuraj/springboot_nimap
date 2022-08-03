@@ -13,10 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
+@Where(clause = "is_active=true")
+@SQLDelete(sql = "UPDATE logger_entity SET is_active=false WHERE id=?")
 @Entity
 public class LoggerEntity implements Serializable {
-	
 	@Id
 	@Column(name = "id", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +38,9 @@ public class LoggerEntity implements Serializable {
 	
 	@Column(name = "expire_at")
 	private Date expireAt;
+	
+	private boolean isActive = true;
+
 	
 	public int getId() {
 		return id;
@@ -67,13 +73,20 @@ public class LoggerEntity implements Serializable {
 		this.expireAt = expireAt;
 	}
 	
-	public LoggerEntity(int id, User userId, String token, Date createdAt, Date expireAt) {
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	public LoggerEntity(int id, User userId, String token, Date createdAt, Date expireAt, boolean isActive) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.token = token;
 		this.createdAt = createdAt;
 		this.expireAt = expireAt;
+		this.isActive = isActive;
 	}
 	public LoggerEntity() {
 		super();
