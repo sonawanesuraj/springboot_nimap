@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.demo.ServiceImpl.AuthServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,11 +24,13 @@ import io.jsonwebtoken.ExpiredJwtException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private UserDetailsService userDetailsService;
-
-	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
+	
+	
+	@Autowired
+AuthServiceImpl authServiceImpl;
+	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
@@ -79,8 +83,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		// once we get the token , now validate
 
 		if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
-
+			//UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
+			UserDetails userDetails = this.authServiceImpl.loadUserByUserName(email);
+			
 			if (this.jwtTokenUtil.validateToken(token, userDetails)) {	
 				
 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
