@@ -20,10 +20,10 @@ public class CustomUserDetailService implements UserDetailsService{
 	
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
+//	
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+//	
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

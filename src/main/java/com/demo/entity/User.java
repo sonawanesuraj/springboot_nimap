@@ -50,12 +50,8 @@ public class User  {
 	@Column(name = "is_active")
 	private boolean isActive = true;
 	
-	@JoinColumn(name="created_by")
-	private User createdBy;
 	
-	@JoinColumn(name="updated_by")
-	private User updatedBy;
-	
+	 
 	@Column(name ="created_at")
 	@CreationTimestamp
 	private Date createdAt;

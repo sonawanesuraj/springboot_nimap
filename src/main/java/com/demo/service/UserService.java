@@ -22,6 +22,8 @@ public class UserService {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	
 	// add user
 		
 		public User save(UserDto userDto) {
@@ -75,11 +77,8 @@ public class UserService {
 		return userDto;
 	}
 
-	// delete all user
-	public void deleteAllUser(User user) {
-		userRepository.deleteAll();
-
-	}
+	
+	
 
 	// delete user by id
 

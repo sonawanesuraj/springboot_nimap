@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 @Service("authServiceImpl")
 public class AuthServiceImpl implements AuthInterface{
 
-	
-	@Autowired
-private PasswordEncoder bcryptEncoder;
 
-@Autowired
-UserRepository userRepository;
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+
+	@Autowired
+	UserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUserName(String email) throws UsernameNotFoundException {
@@ -33,6 +33,7 @@ UserRepository userRepository;
 		}
 		return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
 	}
+
 
 	@Override
 	public boolean comaprePassword(String Password, String hashPassword) 

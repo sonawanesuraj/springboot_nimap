@@ -14,11 +14,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 @Entity
+@Where(clause = "is_active= true")
+@SQLDelete(sql = "UPDATE roles SET is_active=false WHERE role_id=?")
 @Table(name = "roles")
 public class RoleEntity implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="role_id")
@@ -30,8 +39,9 @@ public class RoleEntity implements Serializable{
 	@Column(name ="description")
 	private String description;
 	
-	@Column(name="is_Active")
+	@Column(name="is_active")
 	private boolean isActive = true;
+	
 	
 	
 	@Column(name ="created_at")
@@ -85,7 +95,7 @@ public class RoleEntity implements Serializable{
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
+	public Date getUpdatedAt(){
 		return updatedAt;
 	}
 
@@ -99,6 +109,23 @@ public class RoleEntity implements Serializable{
 
 	public void setUserRole(List<UserRoleEntity> userRole) {
 		this.userRole = userRole;
+	}
+
+	public RoleEntity(int id, String roleName, String description, boolean isActive, Date createdAt, Date updatedAt,
+			List<UserRoleEntity> userRole) {
+		super();
+		this.id = id;
+		this.roleName = roleName;
+		this.description = description;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.userRole = userRole;
+	}
+
+	public RoleEntity() {
+		super();
+		//TODO Auto-generated constructor stub
 	}
 	
 	

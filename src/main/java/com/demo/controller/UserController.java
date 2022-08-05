@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
+	
 	@Autowired
      private UserService userService;
 
@@ -47,11 +48,7 @@ public class UserController {
 	       (@Valid @RequestParam(defaultValue = "")String search,
 			@RequestParam(defaultValue = "1") String pageNumber,
 			@RequestParam(defaultValue = "12") String pageSize) {
-		System.out.println("hello");
-
 		Page<User> user = userService.getAllUsers(search, pageNumber, pageSize);
-
-		System.out.println("hello2");
 
 		if (user.getTotalElements() != 0) {
 

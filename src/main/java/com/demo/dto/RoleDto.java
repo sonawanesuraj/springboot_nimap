@@ -5,6 +5,12 @@ public class RoleDto {
 	private String roleName;
 	private String description;
 	
+	
+	
+	public RoleDto() {
+		super();
+	}
+
 	public RoleDto(String roleName, String description) {
 		super();
 		this.roleName = roleName;
@@ -25,6 +31,7 @@ public class RoleDto {
 
 	public void setDescription(String description) {
 		this.description = description;
+		
 	}
 	
 
