@@ -31,7 +31,7 @@ public class RoleEntity implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="role_id")
-	private int id;
+	private int roleId;
 	
 	@Column(name="role_name")
 	private String roleName;
@@ -56,11 +56,11 @@ public class RoleEntity implements Serializable{
 	private List<UserRoleEntity> userRole;
 
 	public int getId() {
-		return id;
+		return roleId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.roleId = id;
 	}
 
 	public String getRoleName() {
@@ -114,7 +114,7 @@ public class RoleEntity implements Serializable{
 	public RoleEntity(int id, String roleName, String description, boolean isActive, Date createdAt, Date updatedAt,
 			List<UserRoleEntity> userRole) {
 		super();
-		this.id = id;
+		this.roleId = id;
 		this.roleName = roleName;
 		this.description = description;
 		this.isActive = isActive;

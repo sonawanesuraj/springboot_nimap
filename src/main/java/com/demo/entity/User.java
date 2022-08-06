@@ -103,16 +103,20 @@ public class User  {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 		
-		
-		
 		}
 		
 	
+	public List<UserRoleEntity> getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(List<UserRoleEntity> userRole) {
+		this.userRole = userRole;
+	}
 	public User() {
 		super();
 		//TODO Auto-generated constructor stub
 	}
-	public User(int id, String name, String mobileNumber, String email, String password, boolean isActive) {
+	public User(int id, String name, String mobileNumber, String email, String password, boolean isActive,List<UserRoleEntity> userRole) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -120,6 +124,8 @@ public class User  {
 		this.email = email;
 		this.password = password;
 		this.isActive = isActive;
+		this.userRole = userRole;
+
 	}
 	
 	

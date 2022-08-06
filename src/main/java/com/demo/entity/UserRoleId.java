@@ -11,7 +11,6 @@ public class UserRoleId implements Serializable {
 	@ManyToOne
 	private User user;
 	
-	@ManyToOne
 	private RoleEntity role;
 
 	public UserRoleId(User user, RoleEntity role) {
@@ -24,7 +23,7 @@ public class UserRoleId implements Serializable {
 		super();
 		//TODO Auto-generated constructor stub
 	}
-
+	@ManyToOne
 	public User getUser() {
 		return user;
 	}
@@ -32,7 +31,7 @@ public class UserRoleId implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	@ManyToOne
 	public RoleEntity getRole() {
 		return role;
 	}

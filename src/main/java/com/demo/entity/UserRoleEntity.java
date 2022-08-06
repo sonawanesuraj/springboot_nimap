@@ -1,10 +1,14 @@
 package com.demo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,8 +16,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name="user_role")
+@AssociationOverrides({ @AssociationOverride(name = "uri.user", joinColumns = @JoinColumn(name = "user_id")), @AssociationOverride(name = "uri.role", joinColumns = @JoinColumn(name = "role_id")) })
+public class UserRoleEntity implements Serializable {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-public class UserRoleEntity {
 	@EmbeddedId
 	private UserRoleId uri= new UserRoleId();
 	
