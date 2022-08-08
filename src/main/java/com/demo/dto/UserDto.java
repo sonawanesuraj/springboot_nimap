@@ -1,8 +1,6 @@
 package com.demo.dto;
 
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 
 
 
@@ -38,7 +36,7 @@ public class UserDto {
 	
 	
 
-	public UserDto(int id, String name, String mobileNumber, @Email(message = "Email is not valid !!") String email,
+	public UserDto(int id,String name, String mobileNumber, @Email(message = "Email is not valid !!") String email,
 			String password) {
 		super();
 		this.id = id;
@@ -46,6 +44,7 @@ public class UserDto {
 		this.mobileNumber = mobileNumber;
 		this.email = email;
 		this.password = password;
+	
 	}
 
 

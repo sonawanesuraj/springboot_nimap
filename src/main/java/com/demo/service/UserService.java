@@ -1,8 +1,15 @@
 package com.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.demo.dto.UserDto;
+import com.demo.entity.RoleEntity;
 import com.demo.entity.User;
+import com.demo.entity.UserRoleEntity;
+import com.demo.entity.UserRoleId;
 import com.demo.exception.ResourceNotFoundException;
+import com.demo.repository.RoleEntityRepository;
 import com.demo.repository.UserRepository;
 import com.demo.utility.Pagination;
 import org.modelmapper.ModelMapper;
@@ -21,7 +28,11 @@ public class UserService {
 	private ModelMapper modelMapper;
 
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private RoleEntityRepository roleEntityRepository;
+	
 	
 	
 	// add user
@@ -102,5 +113,41 @@ public class UserService {
 		return user;
 
 	}
+	
+//	public void addUserRole(List<RoleEntity> entity , int id) {
+//		List<RoleEntity> list = new ArrayList();
+//		User user = userRepository.findById(id).get();
+//		for(RoleEntity roleEntity:list) {
+//			roleEntity.getId();
+//			RoleEntity roleEntity1 = this.roleEntityRepository.findById(roleId);
+//			
+//				
+//			 
+//			 
+//			
+//		}
+//	}
+	
+	public void addRoleToUser(Integer userId,Integer roleId) {
+		User user = this.userRepository.findById(roleId).get();
+		System.out.println("User"+user);	
+		RoleEntity role = roleEntityRepository.findById(userId).get();
+		System.out.println("role"+role);
+		user.getRoles().add(role);
+		userRepository.save(user);
+		System.out.println(user.getRoles().add(role));
+		
+	
+	
+		
+		
+		
+		
+	}
+	
 
-}
+	}
+	
+	
+
+

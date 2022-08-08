@@ -77,16 +77,6 @@ public class RoleEntityService {
 
 	}
 
-	// Assign user role
-
-	public void assignUserRole(Integer id, Integer roleId) {
-
-		User user = userRepository.findById(id).orElseThrow(null);
-		RoleEntity role = roleEntityRepository.findById(roleId).orElseThrow(null);
-		List<UserRoleEntity> userRole = user.getUserRole();
-		userRole.add(role);
-		user.setUserRole(userRole);
-		userRepository.save(user);
-	}
+	
 
 }

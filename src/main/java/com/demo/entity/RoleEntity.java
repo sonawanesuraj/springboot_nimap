@@ -1,6 +1,7 @@
 package com.demo.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -52,8 +53,19 @@ public class RoleEntity implements Serializable{
 	@UpdateTimestamp
 	private Date updatedAt;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "uri.role", cascade = CascadeType.ALL)
-	private List<UserRoleEntity> userRole;
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "uri.role", cascade = CascadeType.ALL)
+//	private List<UserRoleEntity> userRole;
+	
+	private List <User> user = new ArrayList<>();
+	
+
+	public List<User> getUser() {
+		return user;
+	}
+
+	public void setUser(List<User> user) {
+		this.user = user;
+	}
 
 	public int getId() {
 		return roleId;
@@ -103,16 +115,16 @@ public class RoleEntity implements Serializable{
 		this.updatedAt = updatedAt;
 	}
 
-	public List<UserRoleEntity> getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(List<UserRoleEntity> userRole) {
-		this.userRole = userRole;
-	}
+//	public List<UserRoleEntity> getUserRole() {
+//		return userRole;
+//	}
+//
+//	public void setUserRole(List<UserRoleEntity> userRole) {
+//		this.userRole = userRole;
+//	}
 
 	public RoleEntity(int id, String roleName, String description, boolean isActive, Date createdAt, Date updatedAt,
-			List<UserRoleEntity> userRole) {
+			List<User> user) {
 		super();
 		this.roleId = id;
 		this.roleName = roleName;
@@ -120,13 +132,16 @@ public class RoleEntity implements Serializable{
 		this.isActive = isActive;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.userRole = userRole;
+		this.user = user;
+	
 	}
 
 	public RoleEntity() {
 		super();
 		//TODO Auto-generated constructor stub
 	}
+
+	
 	
 	
 
