@@ -23,7 +23,7 @@ import org.hibernate.annotations.Where;
 @Where(clause = "is_active= true")
 @SQLDelete(sql = "UPDATE roles SET is_active=false WHERE role_id=?")
 @Table(name = "roles")
-public class RoleEntity implements Serializable{
+public class RoleEntity implements Serializable {
 	/**
 	 *
 	 */
@@ -31,40 +31,37 @@ public class RoleEntity implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="role_id")
+	@Column(name = "role_id")
 	private int roleId;
-	
-	@Column(name="role_name")
+
+	@Column(name = "role_name")
 	private String roleName;
-	
-	@Column(name ="description")
+
+	@Column(name = "description")
 	private String description;
-	
-	@Column(name="is_active")
+
+	@Column(name = "is_active")
 	private boolean isActive = true;
-	
-	
-	
-	@Column(name ="created_at")
+
+	@Column(name = "created_at")
 	@CreationTimestamp
 	private Date createdAt;
-	
-	@Column(name="updated_at")
+
+	@Column(name = "updated_at")
 	@UpdateTimestamp
 	private Date updatedAt;
-	
-//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "uri.role", cascade = CascadeType.ALL)
-//	private List<UserRoleEntity> userRole;
-	
-	private List <User> user = new ArrayList<>();
+
+	 @OneToMany(fetch = FetchType.LAZY,mappedBy = "uri.role", cascade = CascadeType.ALL) 
+	 private List<UserRoleEntity> userRole;
+
 	
 
-	public List<User> getUser() {
-		return user;
+	public List<UserRoleEntity> getUserRole() {
+		return userRole;
 	}
 
-	public void setUser(List<User> user) {
-		this.user = user;
+	public void setUserRole(List<UserRoleEntity> userRole) {
+		this.userRole = userRole;
 	}
 
 	public int getId() {
@@ -107,7 +104,7 @@ public class RoleEntity implements Serializable{
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt(){
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
@@ -115,34 +112,25 @@ public class RoleEntity implements Serializable{
 		this.updatedAt = updatedAt;
 	}
 
-//	public List<UserRoleEntity> getUserRole() {
-//		return userRole;
-//	}
-//
-//	public void setUserRole(List<UserRoleEntity> userRole) {
-//		this.userRole = userRole;
-//	}
 
-	public RoleEntity(int id, String roleName, String description, boolean isActive, Date createdAt, Date updatedAt,
-			List<User> user) {
-		super();
-		this.roleId = id;
-		this.roleName = roleName;
-		this.description = description;
-		this.isActive = isActive;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-		this.user = user;
+
 	
-	}
 
 	public RoleEntity() {
 		super();
-		//TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	
+public RoleEntity(int roleId, String roleName, String description, boolean isActive, Date createdAt, Date updatedAt,
+		List<UserRoleEntity> userRole) {
+	super();
+	this.roleId = roleId;
+	this.roleName = roleName;
+	this.description = description;
+	this.isActive = isActive;
+	this.createdAt = createdAt;
+	this.updatedAt = updatedAt;
+	this.userRole = userRole;
+}
 
 }

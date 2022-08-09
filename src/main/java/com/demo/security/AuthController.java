@@ -72,7 +72,7 @@ private UserDetailsService userDetailsService;
 			LoggerDto loggerDto = new LoggerDto();
 			loggerDto.setToken(token);
 			Calendar calender = Calendar.getInstance();
-			calender.add(Calendar.MINUTE, 20);
+			calender.add(Calendar.HOUR_OF_DAY, 8);
 			loggerDto.setExpireAt(calender.getTime());
 			loggerServiceInterface.createLogger(loggerDto, user);
 			

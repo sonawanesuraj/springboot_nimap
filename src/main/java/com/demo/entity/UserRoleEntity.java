@@ -34,7 +34,7 @@ public class UserRoleEntity implements Serializable {
 
 	@UpdateTimestamp
 	private Date updatedAt;
-
+   @EmbeddedId
 	public UserRoleId getUri() {
 		return uri;
 	}

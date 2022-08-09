@@ -8,6 +8,11 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class UserRoleId implements Serializable {
 	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne
 	private User user;
 	

@@ -1,5 +1,4 @@
 package com.demo.entity;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -61,14 +59,11 @@ public class User  {
 	@UpdateTimestamp
 	private Date updatedAt;
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "uri.user", cascade = CascadeType.ALL)
-//	private List<UserRoleEntity> userRole;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "uri.user", cascade = CascadeType.ALL)
+	private List<UserRoleEntity> userRole;
 
-	private List <RoleEntity> roles = new ArrayList<>();
 	
-	public void setRoles(List<RoleEntity> roles) {
-		this.roles = roles;
-	}
+	
 	public int getId() {
 		return id;
 	}
@@ -110,37 +105,32 @@ public class User  {
 		}
 		
 	
-//	public List<UserRoleEntity> getUserRole() {
-//		return userRole;
-//	}
-//	public void setUserRole(List<UserRoleEntity> userRole) {
-//		this.userRole = userRole;
-//	}
+	public List<UserRoleEntity> getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(List<UserRoleEntity> userRole) {
+		this.userRole = userRole;
+	}
 	public User() {
 		super();
 		//TODO Auto-generated constructor stub
 	}
 	
+	
 	public User(int id, String name, String mobileNumber, String email, String password, boolean isActive,
-		List<RoleEntity> roles) {
-	super();
-	this.id = id;
-	this.name = name;
-	this.mobileNumber = mobileNumber;
-	this.email = email;
-	this.password = password;
-	this.isActive = isActive;
-	this.roles = roles;
-}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", mobileNumber=" + mobileNumber + ", email=" + email
-				+ ", password=" + password + ", isActive=" + isActive + ", createdAt=" + createdAt + ", updatedAt="
-				+ updatedAt + "]";
+			Date createdAt, Date updatedAt, List<UserRoleEntity> userRole) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.mobileNumber = mobileNumber;
+		this.email = email;
+		this.password = password;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.userRole = userRole;
 	}
-	public void getRoles() {
-				
-	}
+	
 	
 	
 	

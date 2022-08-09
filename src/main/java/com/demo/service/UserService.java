@@ -1,17 +1,12 @@
 package com.demo.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.demo.dto.UserDto;
-import com.demo.entity.RoleEntity;
 import com.demo.entity.User;
-import com.demo.entity.UserRoleEntity;
-import com.demo.entity.UserRoleId;
 import com.demo.exception.ResourceNotFoundException;
 import com.demo.repository.RoleEntityRepository;
 import com.demo.repository.UserRepository;
 import com.demo.utility.Pagination;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -128,25 +123,20 @@ public class UserService {
 //		}
 //	}
 	
-	public void addRoleToUser(Integer userId,Integer roleId) {
-		User user = this.userRepository.findById(roleId).get();
-		System.out.println("User"+user);	
-		RoleEntity role = roleEntityRepository.findById(userId).get();
-		System.out.println("role"+role);
-		user.getRoles().add(role);
-		userRepository.save(user);
-		System.out.println(user.getRoles().add(role));
-		
-	
-	
-		
-		
-		
-		
+//	public void addRoleToUser(Integer userId,Integer roleId) {
+//		User user = this.userRepository.findById(roleId).get();
+//		System.out.println("User"+user);	
+//		RoleEntity role = roleEntityRepository.findById(userId).get();
+//		System.out.println("role"+role);
+//		user.getRoles().add(role);
+//		userRepository.save(user);
+//		System.out.println(user.getRoles().add(role));
+//		
+//		
 	}
 	
 
-	}
+	
 	
 	
 
