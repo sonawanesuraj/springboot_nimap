@@ -18,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	Page<User>findByNameIgnoreCaseContaining(String name,Pageable pageable ,Class<User> user);
 	
 	public User findByEmail(String email);
-	public User findByEmail(User email);
+//	public User findByEmail(User email);
 	
 }

@@ -116,6 +116,13 @@ public class RoleEntity implements Serializable {
 
 	
 
+	@Override
+	public String toString() {
+		return "RoleEntity [roleId=" + roleId + ", roleName=" + roleName + ", description=" + description
+				+ ", isActive=" + isActive + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", userRole="
+				+ userRole + "]";
+	}
+
 	public RoleEntity() {
 		super();
 		// TODO Auto-generated constructor stub

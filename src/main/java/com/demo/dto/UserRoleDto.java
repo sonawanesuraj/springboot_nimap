@@ -2,33 +2,38 @@ package com.demo.dto;
 
 public class UserRoleDto {
 	
-	private String user ;
+	private String email ;
 	private String role;
 	
 	public UserRoleDto() {
 		super();
 		//TODO Auto-generated constructor stub
 	}
-	
-	
-	public UserRoleDto(String user, String role) {
-		super();
-		this.user = user;
-		this.role = role;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public String getUser() {
-		return user;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public void setUser(String user) {
-		this.user = user;
-	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	public UserRoleDto(String email, String role) {
+		super();
+		this.email = email;
+		this.role = role;
+	}
+	
+	
+
 	
 	
 	

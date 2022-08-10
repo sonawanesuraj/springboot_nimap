@@ -130,6 +130,12 @@ public class User  {
 		this.updatedAt = updatedAt;
 		this.userRole = userRole;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", mobileNumber=" + mobileNumber + ", email=" + email
+				+ ", password=" + password + ", isActive=" + isActive + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + ", userRole=" + userRole + "]";
+	}
 	
 	
 	
