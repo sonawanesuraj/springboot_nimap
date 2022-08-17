@@ -1,4 +1,5 @@
 package com.demo.entity;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.demo.dto.UserDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
@@ -25,9 +28,14 @@ import org.springframework.data.rest.core.config.Projection;
 @Where(clause = "is_active=true")
 @SQLDelete(sql = "UPDATE users SET is_active=false WHERE id=?")
 @Projection(name ="User",types= {UserDto.class})
-public class User  {
+public class User implements Serializable {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(name = "id", unique = true)
+	@Column(name = "id",unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Value("#{target.id}")
 	private int id;
@@ -60,6 +68,7 @@ public class User  {
 	private Date updatedAt;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "uri.user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<UserRoleEntity> userRole;
 
 	

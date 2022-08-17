@@ -1,7 +1,6 @@
 package com.demo.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -14,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,8 +21,9 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Where(clause = "is_active= true")
-@SQLDelete(sql = "UPDATE roles SET is_active=false WHERE role_id=?")
+//@SQLDelete(sql = "UPDATE roles SET is_active=false WHERE role_id=?")
 @Table(name = "roles")
+
 public class RoleEntity implements Serializable {
 	/**
 	 *
@@ -52,6 +53,7 @@ public class RoleEntity implements Serializable {
 	private Date updatedAt;
 
 	 @OneToMany(fetch = FetchType.LAZY,mappedBy = "uri.role", cascade = CascadeType.ALL) 
+	 @JsonIgnore
 	 private List<UserRoleEntity> userRole;
 
 	
@@ -115,6 +117,14 @@ public class RoleEntity implements Serializable {
 
 
 	
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
 
 	@Override
 	public String toString() {

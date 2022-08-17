@@ -14,7 +14,7 @@ public interface RoleEntityRepository extends JpaRepository<RoleEntity, Integer>
 
 	
 	
-@Query("SELECT r FROM  RoleEntity r WHERE r.roleName = :roleName")
+@Query("SELECT r FROM  RoleEntity r WHERE r.roleName =:roleName")
 	public RoleEntity findByName(String roleName);
 	//public RoleEntity findByroleName(RoleEntity roleName);
 
