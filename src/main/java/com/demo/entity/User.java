@@ -27,7 +27,7 @@ import org.springframework.data.rest.core.config.Projection;
 @Table(name="users")
 @Where(clause = "is_active=true")
 @SQLDelete(sql = "UPDATE users SET is_active=false WHERE id=?")
-@Projection(name ="User",types= {UserDto.class})
+//@Projection(name ="User",types= {UserDto.class})
 public class User implements Serializable {
 	/**
 	 *

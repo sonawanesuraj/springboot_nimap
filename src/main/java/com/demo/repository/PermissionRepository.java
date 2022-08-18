@@ -1,5 +1,7 @@
 package com.demo.repository;
 
+
+
 import com.demo.entity.PermissionEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;

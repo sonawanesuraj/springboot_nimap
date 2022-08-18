@@ -20,6 +20,7 @@ public class SpringBootDemoApplication{
 		SpringApplication.run(SpringBootDemoApplication.class, args);			
 	} 
 	
+
 	@Bean
 	public ModelMapper modelMaper() {
 		

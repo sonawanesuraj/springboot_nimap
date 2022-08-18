@@ -16,13 +16,13 @@ public class UserRoleId implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private User user;
+	private User users;
 	
 	private RoleEntity role;
 
 	public UserRoleId(User user, RoleEntity role) {
 		super();
-		this.user = user;
+		this.users = user;
 		this.role = role;
 	}
 
@@ -32,11 +32,11 @@ public class UserRoleId implements Serializable {
 	}
 	@ManyToOne
 	public User getUser() {
-		return user;
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(User users) {
+		this.users = users;
 	}
 	@ManyToOne
 	public RoleEntity getRole() {
@@ -50,7 +50,7 @@ public class UserRoleId implements Serializable {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(role, user);
+		return Objects.hash(role, users);
 
 	}
 
@@ -70,7 +70,7 @@ public class UserRoleId implements Serializable {
 		}
 
 		UserRoleId other = (UserRoleId) obj;
-		return Objects.equals(role, other.role) && Objects.equals(user, other.user);
+		return Objects.equals(role, other.role) && Objects.equals(users, other.users);
 
 	}
 

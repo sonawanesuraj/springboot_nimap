@@ -7,8 +7,6 @@ public class PermissionRequestDto {
 	private String description;
 	private String method; 
 	private String path;
-	private int userRoleId;
-	
 	public String getActionName() {
 		return actionName;
 	}
@@ -39,24 +37,20 @@ public class PermissionRequestDto {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	public int getUserRoleId() {
-		return userRoleId;
-	}
-	public void setUserRoleId(int userRoleId) {
-		this.userRoleId = userRoleId;
-	}
-	
-	public PermissionRequestDto(String actionName, String baseUrl, String description, String method, String path,
-			int userRoleId) {
+	public PermissionRequestDto(String actionName, String baseUrl, String description, String method, String path) {
 		super();
 		this.actionName = actionName;
 		this.baseUrl = baseUrl;
 		this.description = description;
 		this.method = method;
 		this.path = path;
-		this.userRoleId = userRoleId;
+	}
+	public PermissionRequestDto() {
+		super();
+		//TODO Auto-generated constructor stub
 	}
 	
+
 	
 
 
