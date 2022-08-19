@@ -9,8 +9,6 @@ import com.demo.exception.Message;
 import com.demo.exception.ResourceNotFoundException;
 import com.demo.repository.PermissionRepository;
 import com.demo.service.PermissionEntityService;
-import com.demo.service.permissioniServiceInterface;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 public class PermissionController {
-	@Autowired
-	private permissioniServiceInterface permissionServiceInterface;
 	
 	@Autowired
 	private PermissionRepository permissionRepository;
@@ -37,7 +33,7 @@ public class PermissionController {
 	// Add Permission	
 	@PostMapping("/permission")
 	public ResponseEntity<?> addPermissions(@RequestBody PermissionRequestDto permissionRequestDto){		
-	this.permissionServiceInterface.addPermission(permissionRequestDto);
+	this.permissionEntityService.addPermission(permissionRequestDto);
 	return new ResponseEntity<>(HttpStatus.CREATED);
 	
 	}	
@@ -73,19 +69,14 @@ public class PermissionController {
 		{
 		return new ResponseEntity<>(new ErrorResponceDto(e.getMessage(), "Permission Not Found..!!"),HttpStatus.NOT_FOUND);
 		}
-	
-		// delete permission
 	}
-	@DeleteMapping("/permission/{id}")
-	public ResponseEntity<?> deletePermission(@PathVariable("id")int id,@RequestBody PermissionRequestDto permissionRequestDto){
-		try {
-		PermissionEntity entity = this.permissionEntityService.deletePermission(permissionRequestDto, id);
 	
-		return new ResponseEntity<>(new Message("Success","Success", entity),HttpStatus.OK);
+	// delete permission
+	@DeleteMapping("/permission/{id}")
+	public void deletePermission(@PathVariable("id")int id) {
+		permissionEntityService.deletePermission(id);
 		
-	}catch(ResourceNotFoundException e)
-		{
-		return new ResponseEntity<>(new ErrorResponceDto(e.getMessage(), "Permission Not Found"),HttpStatus.NOT_FOUND);
-		}
-
+	}
+	
+	
 }

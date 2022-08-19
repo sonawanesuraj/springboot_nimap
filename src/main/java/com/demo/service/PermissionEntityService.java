@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PermissionEntityService implements permissioniServiceInterface {
+public  class PermissionEntityService  {
 
 	@Autowired
 	private PermissionRepository permissionRepository;
 
-	@Override
+	
 	public void addPermission(PermissionRequestDto permissionRequestDto) {
 
 		PermissionEntity permissionEntity = new PermissionEntity();
@@ -53,7 +53,7 @@ public class PermissionEntityService implements permissioniServiceInterface {
 		return entity;
 	}
 	
-	 // update permission
+	 // update permission by id
 	
 	public PermissionEntity updatePermission(PermissionRequestDto permissionRequestDto,int  id)throws ResourceNotFoundException {
 		
@@ -66,13 +66,13 @@ public class PermissionEntityService implements permissioniServiceInterface {
 		return this.permissionRepository.save(entity);
 		
 	}
-	// delete permission
-	public PermissionEntity deletePermission(PermissionRequestDto permissionRequestDto, int id)throws ResourceNotFoundException{
-		PermissionEntity permissionEntity = permissionRepository.findById(id)
-				.orElseThrow(()->ResourceNotFoundException("Permission Not Found"));
-		return permissionRepository.save(permissionEntity);
-		
-		
+	// delete permission by id
+
+	public void deletePermission(Integer id) {
+		permissionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("id not found"));
+		permissionRepository.deleteById(id);
 	}
+	
+	
 
 }

@@ -18,6 +18,10 @@ public interface RoleEntityRepository extends JpaRepository<RoleEntity, Integer>
 	public RoleEntity findByName(String roleName);
 	//public RoleEntity findByroleName(RoleEntity roleName);
 
+
+
+
+	
 	
 	
 	
