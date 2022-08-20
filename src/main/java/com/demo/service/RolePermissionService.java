@@ -1,8 +1,10 @@
 package com.demo.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.demo.dto.RolePermissionDto;
+import com.demo.entity.AssignPermission;
 import com.demo.entity.PermissionEntity;
 import com.demo.entity.RoleEntity;
 import com.demo.entity.RolePermissionEntity;
@@ -13,7 +15,6 @@ import com.demo.repository.RolePermissionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class RolePermissionService {
@@ -26,7 +27,7 @@ public class RolePermissionService {
 	@Autowired 
 	RoleEntityRepository roleEntityRepository;
 
-	
+	// add permission to role 
 	
   public void addPermissionToRole(RolePermissionDto dto) {
 	  ArrayList<RolePermissionEntity> permission = new ArrayList<>();
@@ -41,6 +42,29 @@ public class RolePermissionService {
 	  
 	  rolePermissionRepository.saveAll(permission);
   }
+  
+  // get all role permissions
+  public List<RolePermissionEntity> getAllRolePermission(){
+	  List<RolePermissionEntity> list = rolePermissionRepository.findAll();
+	return list;
+	  
+  }
+
+
+public void updatePermission(AssignPermission rolePermissionDto) {
+	RolePermissionId  rolePermissionId = new RolePermissionId();
+	RoleEntity roleEntity = this.roleEntityRepository.findById(rolePermissionDto.getRoleId()).orElseThrow();
+	PermissionEntity permissionEntity = this.permissionRepository.findById(rolePermissionDto.getPermissionId()).orElseThrow();
+	rolePermissionId.setRole(roleEntity);
+	rolePermissionId.setPermission(permissionEntity);
+	
+	RolePermissionEntity rolePermissionEntity = new RolePermissionEntity();
+	rolePermissionEntity.setPk(rolePermissionId);
+	this.rolePermissionRepository.updatePermission(roleEntity.getId(),permissionEntity.getId());
+	
 }
+}	
+
+
 
 

@@ -28,17 +28,14 @@ public class UserRoleController {
 	//  add all role to user 
 	
 	@PostMapping("/assignRole")
-	public ResponseEntity<?> asignRole(@RequestBody UserRoleDto userRoleDto ){
-		try {
+	public ResponseEntity<?> asignRole(UserRoleDto userRoleDto ){
+		
 	this.userRoleService.addRolesToUser(userRoleDto);
 		
 		return ResponseEntity.ok("Role Assign Succefully");
 		
-	}catch(Exception  e)
-		{
-		return new ResponseEntity<>(new ErrorResponceDto("User Already Exist", "Please Insert Another Role"),HttpStatus.OK);
-		}
 	}
+	
 	
 	// get all user and roles
 	
